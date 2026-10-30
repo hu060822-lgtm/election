@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { color-scheme: dark; -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-ink text-text font-sans antialiased;
+    font-feature-settings: 'tnum' 1;
+    min-height: 100vh;
+  }
+  :focus-visible { outline: 2px solid theme('colors.electric.glow'); outline-offset: 2px; border-radius: 4px; }
+  ::selection { background: rgba(58, 160, 255, 0.35); }
+  input, select, textarea { color-scheme: dark; }
+}
+
+@layer components {
+  /* Panels: a hairline frame with a 2px heading tab — the broadcast "lower third" look */
+  .panel { @apply relative rounded-lg border border-rule bg-panel/90; }
+  .panel-head { @apply flex items-center justify-between gap-3 border-b border-rule px-4 py-3; }
+  .panel-title { @apply flex items-center gap-2 text-[15px] font-bold tracking-wide text-text; }
+  .panel-title::before { content: ''; @apply inline-block h-4 w-[3px] rounded-full bg-electric; }
+  .num { @apply font-display tabular-nums tracking-tight; }
+  .btn { @apply inline-flex min-h-[40px] items-center justify-center gap-2 rounded-md px-4 text-sm font-bold transition-[background-color,border-color,color,transform] duration-150 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-electric text-ink hover:bg-electric-glow; }
+  .btn-danger { @apply btn bg-signal text-white hover:bg-signal-dim; }
+  .btn-ghost { @apply btn border border-rule-strong bg-transparent text-text-2 hover:border-electric hover:text-text; }
+  .field { @apply w-full rounded-md border border-rule-strong bg-ink-2 px-3 py-2 text-sm text-text placeholder:text-text-4 focus:border-electric focus:outline-none; }
+  .label { @apply mb-1 block text-xs font-bold text-text-2; }
+  .chip { @apply inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-2xs font-bold; }
+  .demo-badge { @apply chip bg-gold/15 text-gold ring-1 ring-gold/40; }
+  .skeleton { @apply rounded bg-[length:200%_100%] animate-shimmer; background-image: linear-gradient(90deg, #111D36 0%, #1B2A4D 50%, #111D36 100%); }
+}
+
+.map-county { transition: fill 600ms cubic-bezier(.2,.7,.2,1), opacity 200ms; cursor: pointer; }
+.map-county:focus-visible { outline: none; }
+.map-county.is-hover, .map-county:focus-visible { filter: url(#county-glow); }
+
+.scrollbar-thin { scrollbar-width: thin; scrollbar-color: #2A3B60 transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}

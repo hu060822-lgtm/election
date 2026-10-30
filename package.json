@@ -1,0 +1,18 @@
+{
+  "name": "taiwan-election-watch",
+  "private": true,
+  "version": "1.0.0",
+  "description": "2026 台灣選舉觀測站 — 朋友看好度 / 支持度觀測平台（非正式民調）",
+  "workspaces": ["server", "web"],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,red \"npm:dev -w server\" \"npm:dev -w web\"",
+    "build": "npm run build -w web && npm run build -w server",
+    "start": "npm run start -w server",
+    "migrate": "npm run migrate -w server",
+    "seed": "npm run seed -w server",
+    "seed:demo": "npm run seed:demo -w server",
+    "test": "npm run test -w server",
+    "typecheck": "npm run typecheck -w server && npm run typecheck -w web"
+  },
+  "devDependencies": { "concurrently": "^9.0.1" }
+}
